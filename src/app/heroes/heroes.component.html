@@ -1,16 +1,72 @@
-<h2>My Heroes</h2>
-<ul cdkDropList class="heroes" (cdkDropListDropped)="drop($event)">
+<div class = example-container>
+<h2>Available Heroes</h2>
+
+<ul cdkDropList
+    #todoList="cdkDropList"
+    [cdkDropListData]="heroes"
+    [cdkDropListConnectedTo]="[doneList]"
+    class="heroes"
+    (cdkDropListDropped)="drop($event)">
+
   <li *ngFor="let hero of heroes"
       [class.selected]="hero === selectedHero"
       (click)="onSelect(hero)" cdkDrag>
     <span class="badge">{{hero.id}}</span> {{hero.name}}
   </li>
 </ul>
+</div>
+
+<div class = example-container>
+<h2>Choosen Heroes</h2>
+
+<ul cdkDropList
+    #doneList="cdkDropList"
+    [cdkDropListData]="heroes2"
+    [cdkDropListConnectedTo]="[todoList]"
+    class="heroes"
+    (cdkDropListDropped)="drop($event)">
+
+  <li *ngFor="let hero of heroes2"
+      [class.selected]="hero === selectedHero"
+      (click)="onSelect(hero)" cdkDrag>
+    <span class="badge">{{hero.id}}</span> {{hero.name}}
+  </li>
+</ul>
+</div>
+
 
 <app-hero-detail [hero]="selectedHero"></app-hero-detail>
 
 <!--
 <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
   <div class="example-box" *ngFor="let movie of movies" cdkDrag>{{movie}}</div>
+</div>
+
+<div class="example-container">
+  <h2>To do</h2>
+
+  <div
+    cdkDropList
+    #todoList="cdkDropList"
+    [cdkDropListData]="todo"
+    [cdkDropListConnectedTo]="[doneList]"
+    class="example-list"
+    (cdkDropListDropped)="drop($event)">
+    <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div>
+  </div>
+</div>
+
+<div class="example-container">
+  <h2>Done</h2>
+
+  <div
+    cdkDropList
+    #doneList="cdkDropList"
+    [cdkDropListData]="done"
+    [cdkDropListConnectedTo]="[todoList]"
+    class="example-list"
+    (cdkDropListDropped)="drop($event)">
+    <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div>
+  </div>
 </div>
 -->
